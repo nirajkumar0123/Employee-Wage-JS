@@ -1,14 +1,14 @@
 // UC1 - check employee is present or absent
-// const IS_ABSENT = 0;
+const IS_ABSENT = 0;
 
-// let empCheck = Math.floor(Math.random() * 10) % 2;
-// if (empCheck == IS_ABSENT) {
-//     console.log("Employee is Absent");
-//     return;
-// }
-// else {
-//     console.log("Employee is Present");
-// }
+let empCheck = Math.floor(Math.random() * 10) % 2;
+if (empCheck == IS_ABSENT) {
+    console.log("Employee is Absent");
+    return;
+}
+else {
+    console.log("Employee is Present");
+}
 
 // UC2 - Calculate daily employee wage based on part time or full time work
 const IS_PART_TIME = 1;
