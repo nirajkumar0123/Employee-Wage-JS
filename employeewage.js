@@ -250,3 +250,31 @@ let nonWorkingDays11 = empDailyHrsAndWageArr
     .filter(dailyHrsAndWage => dailyHrsAndWage.dailyHours == 0)
     .map(dailyHrsAndWage => dailyHrsAndWage.dayNum);
 console.log("Non working days: " + nonWorkingDays11);
+
+// UC11b - Create Employee Payroll Data
+class EmployeePayrollData {
+    id;
+    salary;
+    
+    // Constructor
+    constructor(id, name, salary) {
+        this.id = id;
+        this.name = name;
+        this.salary = salary;
+    }
+   // Getter and setter
+    get name() { return this._name; }
+    set name(name) {
+        this._name = name;
+    }
+
+    // Method
+    toString() {
+        return "id=" + this.id + ", name=" + this.name + ", salary=" + this.salary;
+    }
+}
+
+let employeePayrollData = new EmployeePayrollData(1, "Mark", 30000);
+console.log(employeePayrollData.toString());
+employeePayrollData.name = "John";
+console.log(employeePayrollData.toString());
