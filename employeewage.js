@@ -148,5 +148,34 @@ function totalDaysWorked(numOfDays, dailyWage) {
     if (dailyWage > 0) return numOfDays + 1;
     return numOfDays;
 }
-
 console.log("Number of days the employee worked: " + empDailyWageArr.reduce(totalDaysWorked, 0));
+
+// UC8 - Store the day, hours worked and wage earned in a single object
+let empDailyHrsMap = new Map();
+let empDailyWageMap = new Map();
+totalEmpHrs = 0;
+totalWorkingDays = 0;
+empDailyWageArr = new Array();
+
+while (totalEmpHrs < MAX_HRS_IN_MONTH && totalWorkingDays < MAX_WORKING_DAYS) {
+    totalWorkingDays++;
+    empCheck = Math.floor(Math.random() * 10) % 3;
+    empHrs = getWorkingHours(empCheck);
+    
+    if (totalEmpHrs + empHrs > MAX_HRS_IN_MONTH) {
+        empHrs = MAX_HRS_IN_MONTH - totalEmpHrs;
+    }
+
+    totalEmpHrs += empHrs;
+    let dailyWage = calcDailyWage(empHrs);
+    empDailyWageArr.push(dailyWage);
+    empDailyHrsMap.set(totalWorkingDays, empHrs);
+    empDailyWageMap.set(totalWorkingDays, dailyWage);
+}
+
+// Fixing reduce function
+function totalWages(total, daily) {
+    return total + daily;
+}
+
+console.log("Emp wage map totalHrs: " + Array.from(empDailyWageMap.values()).reduce(totalWages, 0));
