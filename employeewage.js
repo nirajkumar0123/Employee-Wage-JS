@@ -1,14 +1,14 @@
 // UC1 - check employee is present or absent
-const IS_ABSENT = 0;
+// const IS_ABSENT = 0;
 
-let empCheck = Math.floor(Math.random() * 10) % 2;
-if (empCheck == IS_ABSENT) {
-    console.log("Employee is Absent");
-    return;
-}
-else {
-    console.log("Employee is Present");
-}
+// let empCheck = Math.floor(Math.random() * 10) % 2;
+// if (empCheck == IS_ABSENT) {
+//     console.log("Employee is Absent");
+//     return;
+// }
+// else {
+//     console.log("Employee is Present");
+// }
 
 // UC2 - Calculate daily employee wage based on part time or full time work
 const IS_PART_TIME = 1;
@@ -228,3 +228,25 @@ while (totalEmpHrs < MAX_HRS_IN_MONTH && totalWorkingDays < MAX_WORKING_DAYS) {
 }
 
 console.log("Daily hours worked and wage earned: " + empDailyHrsAndWageArr);
+
+// UC 11A to UC 11D - Object operations using arrow functions
+let totalWages11 = empDailyHrsAndWageArr
+    .filter(dailyHrsAndWage => dailyHrsAndWage.dailyWage > 0)
+    .reduce((totalWage, dailyHrsAndWage) => totalWage += dailyHrsAndWage.dailyWage, 0);
+let totalHours11 = empDailyHrsAndWageArr
+    .filter(dailyHrsAndWage => dailyHrsAndWage.dailyHours > 0)
+    .reduce((totalHours, dailyHrsAndWage) => totalHours += dailyHrsAndWage.dailyHours, 0);
+console.log("Total hours: " + totalHours11 + " Total wage: " + totalWages11);
+
+process.stdout.write("Logging full work days");
+empDailyHrsAndWageArr.filter(dailyHrsAndWage => dailyHrsAndWage.dailyHours == 8).forEach(dailyHrsAndWage => process.stdout.write(dailyHrsAndWage.toString()));
+
+let partWorkingDays11 = empDailyHrsAndWageArr
+    .filter(dailyHrsAndWage => dailyHrsAndWage.dailyHours == 4)
+    .map(dailyHrsAndWage => dailyHrsAndWage.toString());
+console.log("\nPart working days: " + partWorkingDays11);
+
+let nonWorkingDays11 = empDailyHrsAndWageArr
+    .filter(dailyHrsAndWage => dailyHrsAndWage.dailyHours == 0)
+    .map(dailyHrsAndWage => dailyHrsAndWage.dayNum);
+console.log("Non working days: " + nonWorkingDays11);
