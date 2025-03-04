@@ -1,14 +1,14 @@
 // UC1 - check employee is present or absent
-const IS_ABSENT = 0;
+// const IS_ABSENT = 0;
 
-let empCheck = Math.floor(Math.random() * 10) % 2;
-if (empCheck == IS_ABSENT) {
-    console.log("Employee is Absent");
-    return;
-}
-else {
-    console.log("Employee is Present");
-}
+// let empCheck = Math.floor(Math.random() * 10) % 2;
+// if (empCheck == IS_ABSENT) {
+//     console.log("Employee is Absent");
+//     return;
+// }
+// else {
+//     console.log("Employee is Present");
+// }
 
 // UC2 - Calculate daily employee wage based on part time or full time work
 const IS_PART_TIME = 1;
@@ -201,3 +201,30 @@ empDailyHrsMap.forEach((value, key) => {
 console.log("Full working days: " + fullWorkingDays);
 console.log("Part working days: " + partWorkingDays);
 console.log("Non working days: " + nonWorkingDays);
+
+// UC10 - Object Creation
+let empDailyHrsAndWageArr = new Array();
+totalEmpHrs = 0;
+totalWorkingDays = 0;
+while (totalEmpHrs < MAX_HRS_IN_MONTH && totalWorkingDays < MAX_WORKING_DAYS) {
+    totalWorkingDays++;
+    let empCheck = Math.floor(Math.random() * 10) % 3;
+    let empHrs = getWorkingHours(empCheck);
+
+    // Ensure we don't exceed MAX_HRS_IN_MONTH
+    if (totalEmpHrs + empHrs > MAX_HRS_IN_MONTH) {
+        empHrs = MAX_HRS_IN_MONTH - totalEmpHrs;
+    }
+
+    totalEmpHrs += empHrs;
+    empDailyHrsAndWageArr.push({
+        dayNum: totalWorkingDays,
+        dailyHours: empHrs,
+        dailyWage: calcDailyWage(empHrs),
+        toString() {
+            return `\nDay ${this.dayNum} => Working Hours: ${this.dailyHours}, Wage Earned: ${this.dailyWage}`;
+        },
+    });
+}
+
+console.log("Daily hours worked and wage earned: " + empDailyHrsAndWageArr);
