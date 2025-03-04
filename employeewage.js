@@ -361,3 +361,75 @@ catch (e) {
 }
 let newEmployeePayrollData13 = new EmployeePayrollData13(1, "Terrisa", 30000, "F", new Date());
 console.log(newEmployeePayrollData13.toString());
+
+// UC14 - Ability to extend Employee Payroll Data to validate
+class EmployeePayrollData14 {
+    // Constructor
+    constructor(id, name, salary, gender, startDate) {
+        this.id = this.validateId(id);
+        this.name = this.validateName(name);
+        this.salary = this.validateSalary(salary);
+        this.gender = this.validateGender(gender);
+        this.startDate = this.validateStartDate(startDate);
+    }
+
+    // Validate Employee ID (must be a positive non-zero number)
+    validateId(id) {
+        if (typeof id !== "number" || id <= 0) throw new Error("Invalid ID: Employee ID must be a positive non-zero number.");
+        return id;
+    }
+
+    // Validate Name (must start with a capital letter and have at least 3 characters)
+    validateName(name) {
+        let nameRegex = /^[A-Z][a-zA-Z]{2,}$/;
+        if (!nameRegex.test(name)) throw new Error("Invalid Name: Name must start with a capital letter and have at least 3 characters.");
+        return name;
+    }
+
+    // Validate Salary (must be a positive number)
+    validateSalary(salary) {
+        salary = Number(salary); // Convert to number if string
+        if (isNaN(salary) || salary <= 0) throw new Error("Invalid Salary: Salary must be a positive non-zero number.");
+        return salary;
+    }
+
+    // Validate Gender (must be 'M' or 'F')
+    validateGender(gender) {
+        if (gender !== "M" && gender !== "F") throw new Error("Invalid Gender: Gender must be 'M' or 'F'.");
+        return gender;
+    }
+
+    // Validate Start Date (must not be a future date)
+    validateStartDate(startDate) {
+        let today = new Date();
+        if (!(startDate instanceof Date) || startDate > today) throw new Error("Invalid Start Date: Date cannot be in the future.");
+        return startDate;
+    }
+
+    // Method to return employee details
+    toString() {
+        const options = { year: "numeric", month: "long", day: "numeric" };
+        const empDate = this.startDate ? this.startDate.toLocaleDateString("en-US", options) : "undefined";
+        return `ID: ${this.id}, Name: ${this.name}, Salary: ${this.salary}, Gender: ${this.gender}, Start Date: ${empDate}`;
+    }
+}
+
+// Try-catch is now outside the constructor
+function createEmployee(id, name, salary, gender, startDate) {
+    try {
+        let employee = new EmployeePayrollData14(id, name, salary, gender, startDate);
+        console.log(employee.toString());
+    } catch (error) {
+        console.error("Error:", error.message);
+    }
+}
+
+// Valid Employee
+createEmployee(1, "John", 50000, "M", new Date("2023-01-15"));
+
+// Invalid Employee (ID is 0)
+createEmployee(0, "Jane", 60000, "F", new Date("2024-06-10"));
+
+
+
+
