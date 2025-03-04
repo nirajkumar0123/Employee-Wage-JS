@@ -278,3 +278,40 @@ let employeePayrollData = new EmployeePayrollData(1, "Mark", 30000);
 console.log(employeePayrollData.toString());
 employeePayrollData.name = "John";
 console.log(employeePayrollData.toString());
+
+// UC12 - Extend Employee Payroll Data to store
+class EmployeePayrollData12 {
+    id;
+    salary;
+    gender;
+    startDate;
+
+    // Constructor
+    constructor(...params) {
+        this.id = params[0];
+        this.name = params[1];
+        this.salary = params[2];
+        this.gender = params[3];
+        this.startDate = params[4];
+    }
+
+    // Getter and setter
+    get name() { return this._name; }
+    set name(name) {
+        this._name = name;
+    }
+
+    // Method
+    toString() {
+        const options = { year: 'numeric', month: 'long', day: 'numeric' };
+        const empDate = this.startDate === undefined ? "undefined" : this.startDate.toLocaleDateString("en-US", options);
+        return "id=" + this.id + ", name=" + this.name + ", salary=" +
+            this.salary + ","+
+            "gender=" + this.gender + ", startDate=" + empDate;
+    }
+}
+
+let employeePayrollData12 = new EmployeePayrollData12(1, "Mark", 30000, "M", new Date());
+console.log(employeePayrollData12.toString());
+let newEmployeePayrollData = new EmployeePayrollData12(1, "Terrisa", 30000, "F", new Date());
+console.log(newEmployeePayrollData.toString());
